@@ -56,9 +56,8 @@
 //];
 
 return [
-	'dummy' => [
+	'web' => [
 		'subModules' => [
-			'routeOverride' => 'modules_dummy_huselpusel_main',
 			'myExtendedModule' => [
 				'configuration' => [
 					'roles' => [
@@ -68,9 +67,9 @@ return [
 					'inheritNavFrame' => true, //arguably, we could assume "true" as default so you need to switch it OFF
 					'icon' => 'EXT:somewhereELse/Resources/Public/Icons/moduleIcon.svg',
 					'labels' => [
-						'module' => 'LLL:EXT:someotherext/locallang_mod.xml:moduleName',
-						'summary' => 'LLL:EXT:someotherext/locallang_mod.xml:summary',
-						'description' => 'LLL:EXT:someotherext/locallang_mod.xml:description',
+						'module' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:moduleName',
+						'summary' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:moduleSummary',
+						'description' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:moduleDescription',
 					],
 					'routes' => [
 						'index' => \Mattes\DummyModule\Modules\OneController::class . '::indexAction',
@@ -79,7 +78,7 @@ return [
 				],
 				'subMenuPosition' => 'left', // could be "top", in which case it'd create a tabbed module
 				'subModules' => [
-					'neatHu' => [
+					'subSubModule' => [
 						'configuration' => [
 							'roles' => [
 								'sender',
@@ -89,9 +88,13 @@ return [
 							'moduleRoute' => 'modules/web/page',
 							'icon' => 'EXT:somewhereELse/Resources/Public/Icons/moduleIcon.svg',
 							'labels' => [
-								'module' => 'LLL:EXT:someotherext/locallang_mod.xml:moduleName',
-								'summary' => 'LLL:EXT:someotherext/locallang_mod.xml:summary',
-								'description' => 'LLL:EXT:someotherext/locallang_mod.xml:description',
+								'module' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:moduleName',
+								'summary' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:moduleSummary',
+								'description' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:moduleDescription',
+							],
+							'routes' => [
+								'index' => \Mattes\DummyModule\Modules\OtherController::class . '::indexAction',
+								'second' => \Mattes\DummyModule\Modules\OtherController::class . '::secondAction',
 							]
 						],
 					],
@@ -100,8 +103,3 @@ return [
 		]
 	]
 ];
-// Route Key
-// modules_dummy_huselpusel_main
-// modules_dummy_huselpusel_second
-
-// modules_dummy_myExtendedModule_main

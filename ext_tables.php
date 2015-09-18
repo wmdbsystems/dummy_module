@@ -17,7 +17,7 @@ if (TYPO3_MODE == 'BE') {
 			'routeTarget' => \Mattes\DummyModule\Modules\OneController::class . '::mainAction',
 			'workspaces' => 'online',
 			'labels' => array(
-				'll_ref' => 'Dummy',
+				'll_ref' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf',
 				'tabs_images' => [
 //					'tab' => 'EXT:direct_mail/Resources/Public/Icons/ext-direct-mail.svg'
 				],
