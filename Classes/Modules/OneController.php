@@ -3,6 +3,7 @@ namespace Mattes\DummyModule\Modules;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
@@ -78,12 +79,54 @@ class OneController {
 
 	protected function makeButtons() {
 		$buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
-		$saveButton = $buttonBar->makeLinkButton()
-			->setHref('#')
-//			->setRoute(OneController::class . '::secondAction')
+
+		$saveButton = $buttonBar->makeInputButton()
+			->setName('save')
+			->setValue('1')
 			->setIcon($this->iconFactory->getIcon('actions-document-save', Icon::SIZE_SMALL))
-			->setTitle('My Title');
-		$buttonBar->addButton($saveButton);
+			->setTitle('Save');
+
+		$saveAndCloseButton = $buttonBar->makeInputButton()
+			->setName('save_and_close')
+			->setValue('1')
+			->setTitle('Save and close')
+			->setIcon($this->iconFactory->getIcon('actions-document-save-close', Icon::SIZE_SMALL));
+
+		$saveAndShowPageButton = $buttonBar->makeInputButton()
+			->setName('save_and_show')
+			->setValue('1')
+			->setTitle('Save and show')
+			->setIcon($this->iconFactory->getIcon('actions-document-save-view', Icon::SIZE_SMALL));
+
+		$deleteButton = $buttonBar->makeLinkButton()
+			->setHref('#')
+			->setTitle('Delete item')
+			->setIcon($this->iconFactory->getIcon('actions-edit-delete', Icon::SIZE_SMALL));
+
+		$moveButton = $buttonBar->makeLinkButton()
+			->setHref('#')
+			->setTitle('Move element')
+			->setIcon($this->iconFactory->getIcon('actions-page-move', Icon::SIZE_SMALL));
+
+		$editPageButton = $buttonBar->makeLinkButton()
+			->setHref('#')
+			->setTitle('Edit properties')
+			->setIcon($this->iconFactory->getIcon('actions-page-open', Icon::SIZE_SMALL));
+
+		$splitButtonElement = $buttonBar->makeSplitButton()
+			->addItem($saveButton)
+			->addItem($saveAndCloseButton)
+			->addItem($saveAndShowPageButton);
+
+		$buttonBar->addButton($editPageButton, ButtonBar::BUTTON_POSITION_LEFT, 1)
+			->addButton($moveButton, ButtonBar::BUTTON_POSITION_LEFT, 1)
+			->addButton($splitButtonElement, ButtonBar::BUTTON_POSITION_LEFT, 2)
+			->addButton($deleteButton, ButtonBar::BUTTON_POSITION_LEFT, 3)
+			->addButton($editPageButton, ButtonBar::BUTTON_POSITION_RIGHT, 1)
+			->addButton($moveButton, ButtonBar::BUTTON_POSITION_RIGHT, 1)
+			->addButton($deleteButton, ButtonBar::BUTTON_POSITION_RIGHT, 2)
+			->addButton($splitButtonElement, ButtonBar::BUTTON_POSITION_RIGHT, 3);
+
 	}
 
 	protected function makeControllerMenu() {
