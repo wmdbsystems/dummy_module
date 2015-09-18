@@ -88,9 +88,9 @@ return [
 							'moduleRoute' => 'modules/web/page',
 							'icon' => 'EXT:dummy_module/Resources/Public/Icons/othermodule.svg',
 							'labels' => [
-								'module' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:moduleName',
-								'summary' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:moduleSummary',
-								'description' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:moduleDescription',
+								'module' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:subModuleName',
+								'summary' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:subModuleSummary',
+								'description' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:SubModuleDescription',
 							],
 							'routes' => [
 								'index' => \Mattes\DummyModule\Modules\OtherController::class . '::indexAction',

@@ -21,6 +21,15 @@
 			<trans-unit id="moduleDescription" xml:space="preserve">
 				<source>Dummy Module Description</source>
 			</trans-unit>
+			<trans-unit id="subModuleName" xml:space="preserve">
+				<source>Sub Module Label</source>
+			</trans-unit>
+			<trans-unit id="subModuleSummary" xml:space="preserve">
+				<source>Sub Module Summary</source>
+			</trans-unit>
+			<trans-unit id="subModuleDescription" xml:space="preserve">
+				<source>Sub Module Description</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
