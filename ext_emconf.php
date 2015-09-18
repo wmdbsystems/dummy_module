@@ -1,0 +1,27 @@
+<?php
+
+$EM_CONF[$_EXTKEY] = array(
+	'title' => 'Dummy Module for 7.4',
+	'description' => '',
+	'category' => 'module',
+	'shy' => FALSE,
+	'version' => '0.0.1',
+	'dependencies' => '',
+	'conflicts' => '',
+	'priority' => '',
+	'loadOrder' => '',
+	'TYPO3_version' => '6.2.2-7.5.99',
+	'PHP_version' => '5.5.0',
+	'module' => '',
+	'state' => 'stable',
+	'uploadfolder' => '',
+	'createDirs' => '',
+	'modify_tables' => '',
+	'clearcacheonload' => 1,
+	'lockType' => '',
+	'author' => 'Mathias Schreiber',
+	'author_email' => 'mathias@typo3.org',
+	'author_company' => '',
+	'CGLcompliance' => '',
+	'CGLcompliance_note' => '',
+);
