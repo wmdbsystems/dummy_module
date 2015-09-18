@@ -65,7 +65,7 @@ return [
 					],
 					'showInWorkspaces' => true,
 					'inheritNavFrame' => true, //arguably, we could assume "true" as default so you need to switch it OFF
-					'icon' => 'EXT:somewhereELse/Resources/Public/Icons/moduleIcon.svg',
+					'icon' => 'EXT:dummy_module/Resources/Public/Icons/onemodule.svg',
 					'labels' => [
 						'module' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:moduleName',
 						'summary' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:moduleSummary',
@@ -86,7 +86,7 @@ return [
 							'showInWorkspaces' => true,
 							'inheritNavFrame' => true,
 							'moduleRoute' => 'modules/web/page',
-							'icon' => 'EXT:somewhereELse/Resources/Public/Icons/moduleIcon.svg',
+							'icon' => 'EXT:dummy_module/Resources/Public/Icons/othermodule.svg',
 							'labels' => [
 								'module' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:moduleName',
 								'summary' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf:moduleSummary',

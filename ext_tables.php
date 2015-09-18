@@ -19,7 +19,7 @@ if (TYPO3_MODE == 'BE') {
 			'labels' => array(
 				'll_ref' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf',
 				'tabs_images' => [
-//					'tab' => 'EXT:direct_mail/Resources/Public/Icons/ext-direct-mail.svg'
+					'tab' => 'EXT:dummy_module/Resources/Public/Icons/onemodule.svg'
 				],
 			),
 		]
