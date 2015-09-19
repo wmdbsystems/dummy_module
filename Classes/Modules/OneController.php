@@ -3,23 +3,14 @@ namespace Mattes\DummyModule\Modules;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Backend\Module\ModuleTemplateTrait;
+use TYPO3\CMS\Backend\Module\ProcessRequestTrait;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
-use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Core\Imaging\Icon;
-use TYPO3\CMS\Core\Imaging\IconFactory;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class OneController {
 
-	/**
-	 * @var ModuleTemplate
-	 */
-	protected $moduleTemplate;
-
-	/**
-	 * @var IconFactory
-	 */
-	protected $iconFactory;
+	use ProcessRequestTrait, ModuleTemplateTrait;
 
 	/**
 	 * @var int
@@ -30,8 +21,7 @@ class OneController {
 	 * Class Constructor
 	 */
 	public function __construct() {
-		$this->moduleTemplate = GeneralUtility::makeInstance(ModuleTemplate::class);
-		$this->iconFactory = GeneralUtility::makeInstance(IconFactory::class);
+		$this->initializeModuleTemplate();
 		$this->setUpModule();
 	}
 
@@ -42,8 +32,8 @@ class OneController {
 	 * @param ResponseInterface $response
 	 * @return ResponseInterface the response with the content
 	 */
-	public function mainAction(ServerRequestInterface $request, ResponseInterface $response) {
-		$this->main();
+	public function index(ServerRequestInterface $request, ResponseInterface $response) {
+		$this->moduleTemplate->setContent('I am the Result of the MainAction');
 		$response->getBody()->write($this->moduleTemplate->renderContent());
 		return $response;
 	}
@@ -63,11 +53,6 @@ class OneController {
 
 	protected function second() {
 		$this->moduleTemplate->setContent('I am the Result of the SecondAction');
-	}
-
-	protected function main() {
-		$this->moduleTemplate->setContent('I am the Result of the MainAction');
-
 	}
 
 	protected function setUpModule() {
@@ -130,12 +115,11 @@ class OneController {
 	}
 
 	protected function makeControllerMenu() {
-		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getModuleMenuRegistry();
+		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry();
 		$menu = $menuRegistry->makeMenu()->setIdentifier('ControllerMenu')->setType('TabsMenu');
 
 		$item1 = $menu
 			->makeMenuItem()
-			->setController('')
 			->setAction('')
 			->setParameters(
 				[
@@ -163,7 +147,7 @@ class OneController {
 	}
 
 	protected function makeActionMenu() {
-		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getModuleMenuRegistry();
+		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry();
 		$menu = $menuRegistry->makeMenu()->setIdentifier('ActionMenu')->setType('PillsMenu');
 
 		$item1 = $menu
@@ -195,7 +179,7 @@ class OneController {
 	}
 
 	protected function makeParameterMenu() {
-		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getModuleMenuRegistry();
+		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry();
 		$menu = $menuRegistry->makeMenu()->setIdentifier('parameterMenu')->setLabel('Select an option');
 
 		$item1 = $menu

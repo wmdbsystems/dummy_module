@@ -86,13 +86,13 @@ class OtherController {
 	}
 
 	protected function makeControllerMenu() {
-		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getModuleMenuRegistry();
+		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry();
 		$menu = $menuRegistry->makeMenu()->setIdentifier('ControllerMenu')->setType('TabsMenu');
 
 		$item1 = $menu
 			->makeMenuItem()
-			->setController('')
-			->setAction('')
+			->setModule('')
+			->setTarget('')
 			->setParameters(
 				[
 					'id' => $this->id,
@@ -104,8 +104,8 @@ class OtherController {
 
 		$item2 = $menu
 			->makeMenuItem()
-			->setController('')
-			->setAction('')
+			->setModule('')
+			->setTarget('')
 			->setParameters(
 				[
 					'id' => $this->id,
@@ -119,12 +119,12 @@ class OtherController {
 	}
 
 	protected function makeActionMenu() {
-		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getModuleMenuRegistry();
+		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry();
 		$menu = $menuRegistry->makeMenu()->setIdentifier('ActionMenu')->setType('PillsMenu');
 
 		$item1 = $menu
 			->makeMenuItem()
-			->setAction('')
+			->setTarget('')
 			->setParameters(
 				[
 					'id' => $this->id,
@@ -136,8 +136,8 @@ class OtherController {
 
 		$item2 = $menu
 			->makeMenuItem()
-			->setController('')
-			->setAction('')
+			->setModule('')
+			->setTarget('')
 			->setParameters(
 				[
 					'id' => $this->id,
@@ -151,7 +151,7 @@ class OtherController {
 	}
 
 	protected function makeParameterMenu() {
-		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getModuleMenuRegistry();
+		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry();
 		$menu = $menuRegistry->makeMenu()->setIdentifier('parameterMenu')->setLabel('Select an option');
 
 		$item1 = $menu
@@ -167,8 +167,8 @@ class OtherController {
 
 		$item2 = $menu
 			->makeMenuItem()
-			->setController('')
-			->setAction('')
+			->setModule('')
+			->setTarget('')
 			->setParameters(
 				[
 					'id' => $this->id,

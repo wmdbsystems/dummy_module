@@ -14,7 +14,7 @@ if (TYPO3_MODE == 'BE') {
 		[
 			'name' => 'web_txdummy',
 			'access' => 'user,group',
-			'routeTarget' => \Mattes\DummyModule\Modules\OneController::class . '::mainAction',
+			'routeTarget' => \Mattes\DummyModule\Modules\OneController::class . '::processRequest',
 			'workspaces' => 'online',
 			'labels' => array(
 				'll_ref' => 'LLL:EXT:dummy_module/Resources/Private/Language/locallang.xlf',
