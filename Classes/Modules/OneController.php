@@ -1,38 +1,43 @@
 <?php
 namespace Mattes\DummyModule\Modules;
 
+/*
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
+
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Backend\Module\ModuleTemplateTrait;
-use TYPO3\CMS\Backend\Module\ProcessRequestTrait;
+use TYPO3\CMS\Backend\Module\AbstractModule;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Core\Imaging\Icon;
 
-class OneController {
+/**
+ * Class OneController
+ *
+ * @package Mattes\DummyModule\Modules
+ */
+class OneController extends AbstractModule {
 
-	use ProcessRequestTrait, ModuleTemplateTrait;
-
-	/**
-	 * @var int
-	 */
-	protected $id = 1;
-
-	/**
-	 * Class Constructor
-	 */
-	public function __construct() {
-		$this->initializeModuleTemplate();
-		$this->setUpModule();
-	}
 
 	/**
 	 * Injects the request object for the current request or subrequest
 	 *
-	 * @param ServerRequestInterface $request the current request
-	 * @param ResponseInterface $response
-	 * @return ResponseInterface the response with the content
+	 * @param ServerRequestInterface $request The current request
+	 * @param ResponseInterface $response The Response
+	 *
+	 * @return ResponseInterface The response with the content
 	 */
 	public function index(ServerRequestInterface $request, ResponseInterface $response) {
+		$this->setUpModule();
 		$this->moduleTemplate->setContent('I am the Result of the MainAction');
 		$response->getBody()->write($this->moduleTemplate->renderContent());
 		return $response;
@@ -41,20 +46,23 @@ class OneController {
 	/**
 	 * Injects the request object for the current request or subrequest
 	 *
-	 * @param ServerRequestInterface $request the current request
-	 * @param ResponseInterface $response
-	 * @return ResponseInterface the response with the content
+	 * @param ServerRequestInterface $request The current request
+	 * @param ResponseInterface $response The Response
+	 *
+	 * @return ResponseInterface The response with the content
 	 */
 	public function secondAction(ServerRequestInterface $request, ResponseInterface $response) {
-		$this->second();
+		$this->setUpModule();
+		$this->moduleTemplate->setContent('I am the Result of the SecondAction');
 		$response->getBody()->write($this->moduleTemplate->renderContent());
 		return $response;
 	}
 
-	protected function second() {
-		$this->moduleTemplate->setContent('I am the Result of the SecondAction');
-	}
-
+	/**
+	 * Sets up the module with navigation and such
+	 *
+	 * @return void
+	 */
 	protected function setUpModule() {
 		$this->makeButtons();
 		$this->makeControllerMenu();
@@ -62,6 +70,11 @@ class OneController {
 		$this->makeParameterMenu();
 	}
 
+	/**
+	 * Sets up the module with buttons
+	 *
+	 * @return void
+	 */
 	protected function makeButtons() {
 		$buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
 
@@ -114,95 +127,84 @@ class OneController {
 
 	}
 
+	/**
+	 * Creates a menu of TabsMenu
+	 *
+	 * @return void
+	 *
+	 * @throws \InvalidArgumentException In case of invalid menuItems
+	 */
 	protected function makeControllerMenu() {
 		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry();
-		$menu = $menuRegistry->makeMenu()->setIdentifier('ControllerMenu')->setType('TabsMenu');
+		$menu = $menuRegistry->makeMenu()->setIdentifier('ControllerMenu')->setRenderType('TabsMenu');
 
 		$item1 = $menu
 			->makeMenuItem()
-			->setAction('')
-			->setParameters(
-				[
-					'id' => $this->id,
-					'someThing' => 'different'
-				]
-			)
-			->setTitle('Controller Item 1');
+			->setHref('#')
+			->setTitle('Params');
 		$menu->addMenuItem($item1);
 
 		$item2 = $menu
 			->makeMenuItem()
-			->setController('')
-			->setAction('')
-			->setParameters(
-				[
-					'id' => $this->id,
-					'someThing' => 'different'
-				]
-			)
-			->setTitle('Controller Item 2')
+			->setHref('#')
+			->setTitle('Ctrl + Act + Params')
 			->setActive(TRUE);
 		$menu->addMenuItem($item2);
+
+		$item3 = $menu
+			->makeMenuItem()
+			->setHref('#')
+			->setTitle('Ctrl + Act');
+		$menu->addMenuItem($item3);
 		$menuRegistry->addMenu($menu);
 	}
 
+	/**
+	 * Creates a menu of PillsMenu
+	 *
+	 * @return void
+	 *
+	 * @throws \InvalidArgumentException In case of invalid menuItems
+	 */
 	protected function makeActionMenu() {
 		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry();
-		$menu = $menuRegistry->makeMenu()->setIdentifier('ActionMenu')->setType('PillsMenu');
+		$menu = $menuRegistry->makeMenu()->setIdentifier('ActionMenu')->setRenderType('PillsMenu');
 
 		$item1 = $menu
 			->makeMenuItem()
-			->setAction('')
-			->setParameters(
-				[
-					'id' => $this->id,
-					'someThing' => 'different'
-				]
-			)
-			->setTitle('Action Item 1');;
+			->setHref('#')
+			->setTitle('Action Item 1');
 		$menu->addMenuItem($item1);
 
 		$item2 = $menu
 			->makeMenuItem()
-			->setController('')
-			->setAction('')
-			->setParameters(
-				[
-					'id' => $this->id,
-					'someThing' => 'different'
-				]
-			)
+			->setHref('#')
 			->setTitle('Action Item 2')
 			->setActive(TRUE);
 		$menu->addMenuItem($item2);
 		$menuRegistry->addMenu($menu);
 	}
 
+	/**
+	 * Creates a menu of SelectBoxJumpMenu
+	 *
+	 * @return void
+	 *
+	 * @throws \InvalidArgumentException In case of invalid menuItems
+	 */
 	protected function makeParameterMenu() {
 		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry();
 		$menu = $menuRegistry->makeMenu()->setIdentifier('parameterMenu')->setLabel('Select an option');
 
 		$item1 = $menu
 			->makeMenuItem()
-			->setParameters(
-				[
-					'id' => $this->id,
-					'someThing' => 'different'
-				]
-			)
+			->setHref('#')
 			->setTitle('Parameter Item 1');
 		$menu->addMenuItem($item1);
 
 		$item2 = $menu
 			->makeMenuItem()
-			->setController('')
-			->setAction('')
-			->setParameters(
-				[
-					'id' => $this->id,
-					'someThing' => 'different'
-				]
-			)
+			->setHref('#')
 			->setTitle('Parameter Item 2')
 			->setActive(TRUE);
 		$menu->addMenuItem($item2);
