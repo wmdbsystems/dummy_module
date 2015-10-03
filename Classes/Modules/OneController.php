@@ -20,6 +20,7 @@ use TYPO3\CMS\Backend\Module\AbstractModule;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class OneController
@@ -76,7 +77,7 @@ Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Sed augue ips
 	 */
 	public function secondAction(ServerRequestInterface $request, ResponseInterface $response) {
 		$this->setUpModule();
-		$this->moduleTemplate->setContent('I am the Result of the SecondAction');
+		$this->moduleTemplate->setContent('<br><br>I am the Result of the SecondAction');
 		$response->getBody()->write($this->moduleTemplate->renderContent());
 		return $response;
 	}
@@ -197,18 +198,20 @@ Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Sed augue ips
 	protected function makeActionMenu() {
 		$menuRegistry = $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry();
 		$menu = $menuRegistry->makeMenu()->setIdentifier('ActionMenu')->setLabel('MenuLabel 2');
+		$activeAction = GeneralUtility::_GP('action');
 
 		$item1 = $menu
 			->makeMenuItem()
-			->setHref('#')
-			->setTitle('Action Item 1');
+			->setHref(BackendUtility::getModuleUrl('web_txdummy'))
+			->setTitle('Action Item 1')
+			->setActive(empty($activeAction));
 		$menu->addMenuItem($item1);
 
 		$item2 = $menu
 			->makeMenuItem()
-			->setHref('#')
+			->setHref(BackendUtility::getModuleUrl('web_txdummy', ['action' => 'secondAction']))
 			->setTitle('Action Item 2')
-			->setActive(TRUE);
+			->setActive($activeAction === 'secondAction');
 		$menu->addMenuItem($item2);
 		$menuRegistry->addMenu($menu);
 	}
